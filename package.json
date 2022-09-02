@@ -1,0 +1,38 @@
+{
+  "name": "auto-zoom",
+  "version": "1.0.0",
+  "author": "Yesifang",
+  "license": "MIT",
+  "description": "This is a screen adaptive zoom tool.Commonly used in large screen projects.这是一个屏幕自适应缩放工具。常用于大屏项目。",
+  "main": "./src/index.js",
+  "scripts": {
+    "serve": "npx webpack-dev-server",
+    "build": "npx webpack"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.9",
+    "@babel/preset-env": "^7.16.11",
+    "babel-loader": "^8.2.5",
+    "html-webpack-plugin": "^5.5.0",
+    "webpack": "^5.72.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.8.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:SuperYesifang/auto-zoom.git"
+  },
+  "keywords": [
+    "big screen",
+    "large screen",
+    "auto scale",
+    "auto zoom",
+    "big screen auto resize",
+    "large screen auto resize",
+    "screen adaptive"
+  ],
+  "bugs": {
+    "url": "https://github.com/SuperYesifang/auto-zoom/issues"
+  },
+  "homepage": "https://yesifang.com"
+}
