@@ -1,6 +1,6 @@
 const defaultOpts = {
 	target: document.body,
-	reference: false,
+	reference: void 0,
 	designSize: [1920, 1080],
 	transform: "translate(0, 0)",
 	style: { transformOrigin: "0 0" },
