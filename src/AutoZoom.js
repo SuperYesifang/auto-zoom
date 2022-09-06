@@ -2,10 +2,8 @@ const defaultOpts = {
 	target: document.body,
 	reference: false,
 	designSize: [1920, 1080],
-	transform: {
-		origin: "0 0",
-		translate: "translate(0, 0)"
-	},
+	transform: "translate(0, 0)",
+	style: { transformOrigin: "0 0" },
 	pause: false
 };
 
@@ -13,11 +11,11 @@ export default class AutoZoom {
 	listeners = new Map();
 	constructor(opts) {
 		let localOpts = Object.assign({...defaultOpts}, opts);
-		localOpts.transform = Object.assign({...defaultOpts.transform}, opts.transform);
 		this.target = localOpts.target;
 		this.reference = localOpts.reference;
 		this.designSize = localOpts.designSize;
 		this.transform = localOpts.transform;
+		this.style = localOpts.style;
 		this.pause = localOpts.pause;
 		this.zoom = 1;
 		this.unobserve = null;
@@ -80,11 +78,15 @@ export default class AutoZoom {
 			dom.style.height = dH + "px";
 			let wR = sW / dW, hR = sH / dH;
 			let rR = wR < hR ? wR : hR;
-			dom.style.transformOrigin = this.transform.origin || "";
-			if (this.transform.translate instanceof Function) {
-				dom.style.transform = this.tansform.translate(rR, [sW, sH], [dW, dH]);
+			if (typeof this.style == "object") {
+				for (let key in this.style) {
+					dom.style[key] = this.style[key];
+				}
+			}
+			if (this.transform instanceof Function) {
+				dom.style.transform = this.tansform(rR, [sW, sH], [dW, dH]);
 			} else if (this.transform) {
-				dom.style.transform = `scale(${rR}) ${this.transform.translate || ""}`;
+				dom.style.transform = `scale(${rR}) ${this.transform || ""}`;
 			}
 			this.zoom = rR;
 			let list = this.listeners.get("zoom");

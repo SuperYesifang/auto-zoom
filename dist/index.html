@@ -60,18 +60,14 @@
 		window.autoZoom1 = new AutoZoom({
 			target: "#root",
 			designSize: [8192,2160],
-			transform: {
-				translate: "translate(-50%, -50%)"
-			}
+			transform: "translate(-50%, -50%)"
 		});
 		window.autoZoom2 = new AutoZoom({
 			target: "#observer-app",
 			designSize: [1920,1080],
 			reference: "#app",
-			transform: {
-				origin: "top right",
-				translate: "translate(0, -50%)"
-			},
+			transform: "translate(0, -50%)",
+			style: { transformOrigin: "top right" },
 			pause: true
 		});
 		window.autoZoom2.on("start", () => console.log("start"));
