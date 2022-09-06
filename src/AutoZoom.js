@@ -11,6 +11,7 @@ export default class AutoZoom {
 	listeners = new Map();
 	constructor(opts) {
 		let localOpts = Object.assign({...defaultOpts}, opts);
+		localOpts.style = Object.assign({...defaultOpts.style}, opts.style);
 		this.target = localOpts.target;
 		this.reference = localOpts.reference;
 		this.designSize = localOpts.designSize;
