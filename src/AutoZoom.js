@@ -2,6 +2,7 @@ const defaultOpts = {
 	target: document.body,
 	reference: void 0,
 	designSize: [1920, 1080],
+	realSize: [1920, 1080],
 	transform: "translate(0, 0)",
 	style: { transformOrigin: "0 0" },
 	pause: false
@@ -15,11 +16,11 @@ export default class AutoZoom {
 		this.target = localOpts.target;
 		this.reference = localOpts.reference;
 		this.designSize = localOpts.designSize;
+		this.realSize = localOpts.designSize;
 		this.transform = localOpts.transform;
 		this.style = localOpts.style;
 		this.pause = localOpts.pause;
 		this.zoom = 1;
-		this.realSize = localOpts.designSize;
 		this.unobserve = null;
 		this.rezoom = null;
 		this.init();
