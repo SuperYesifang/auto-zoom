@@ -19,6 +19,7 @@ export default class AutoZoom {
 		this.style = localOpts.style;
 		this.pause = localOpts.pause;
 		this.zoom = 1;
+		this.realSize = localOpts.designSize;
 		this.unobserve = null;
 		this.rezoom = null;
 		this.init();
@@ -90,6 +91,7 @@ export default class AutoZoom {
 				dom.style.transform = `scale(${rR}) ${this.transform || ""}`;
 			}
 			this.zoom = rR;
+			this.realSize = [this.designSize[0]*rR, this.designSize[1]*rR];
 			let list = this.listeners.get("zoom");
 			if (list) list.forEach(cb => cb(this));
 		} else throw Error("`designSize` Option must be an array of length greater than 2.");

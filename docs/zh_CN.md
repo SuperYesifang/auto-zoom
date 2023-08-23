@@ -1,6 +1,6 @@
 # auto-zoom
 
-![auto-zoom](https://img.shields.io/badge/auto--zoom-v2.0.3-%23C50008?logo=npm)
+![auto-zoom](https://img.shields.io/badge/auto--zoom-v2.1.0-%23C50008?logo=npm)
 [![blog](https://img.shields.io/badge/blog-yesifang.com-orange?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAABjFBMVEUAAAAIAQUiBhQVBA05CyK0I2z4MJTgKoV8GEoKAgZyFkT8MZfTKX4dBRFWEDP9MZfMJ3kGAQQHAQTlK4htFUEAHRMATDAAbUQAf1EAh1QAgFAAbUUATDAAHhNMDy7KJngAeUsAKBp9GEr4MJMDAQIAmWEAWzkABAOGGlD9MZYAcUgABQNoFD7mLIoAZUCdHl4ANiKiH2EpCBgAh1UAAgERAwrVKH9nFD0ALBwSAwuqIWXmK4pTEDIAWTgrCBp2F0eVHVmKG1NWETMAdEgAgVAAAQIAJTcATXIAZJQAbqUAap0AVoEAfE4AAQEAN1EAgMAAaEIACQ4Aap4ARiwACQ0AebMAmV8AEwwAAAAAZ5oAZT8AMkkAkFoAEQsAebMAl14AGCQAkl0ALx4AOlYAeEsAGRAATHAAbkUAll0All4AbkYAMB4ATXMABwQAIxYANiIAPicANyIAJBYAQF4AIjIAis0AAgMAhsYAZJYARWYAk9oAHy4ABQcAfbkAO1gAis3/MZgAmmEAld3///8EabibAAAAgHRSTlMACCIVObX54XwKcv3UHVb+zQYH5m0xfrTU4NW1fzJMy8hDffkD/pcHh/69CGjnqJ5ZoynfBBHWZ0kSqudTlCt2lotWwNUCQIOrvrWVzwFe3a4QtnQPz/0gAbKnVe4c0Psp9E9jximBtvj4t0+FCzpaZlo7bTruA+Wtdfs1CNdm7ZpKyEIAAAABYktHRIP8tM/SAAAAB3RJTUUH5QoVBh0NInrzjgAAATtJREFUOMt902VbwzAUBeDLcAYMhru7uzPcXYcP1+EyPMkvZ03TNk0TztfzNnL7BECeCFck/JOo6BiEYuPiVX2CG9EkJsn7ZA9iSUmV9d40ZCYdICMzKzsnNy+/wASFVo+KALCR4hIGSjlQVm4BXFFZRUE1B2q8HMC4tk4D9RxoABvAjRpwuS3QJADcrIkW6witImhrD4OOTtZ7ukAEuFtboqeXjqqvH5xgQL/qoG9oeET/FQIYdQxWAGNmMT4xOTU9MyuCOVbPLywSGhEs6f3yCiFysEr7tXWiABubWu/fIiqwTRfYISqwu0fBvgoc0DlCgCjA4ZF+hWMFODllMzizgfML2l5eXfuNGd7YAARv7+4fHoPc9J/swJlnrn+Rgdc3C4SkT+vd7D8+peDr2+h/FK838Ev3D4W//wNiKCWwWalJAwAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMS0xMC0yMVQwNjoyOToxMyswMDowMP1Zb/cAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjEtMTAtMjFUMDY6Mjk6MTMrMDA6MDCMBNdLAAAAAElFTkSuQmCC)](//yesifang.com)
 
 > 这是一个屏幕自适应缩放工具。常用于大屏项目。
@@ -120,6 +120,8 @@ type AutoZoomOptions {
   target:string | HTMLElement; // 要自动缩放的目标元素。
   reference: string | HTMLElement; // 自动缩放的参照元素。
   designSize: [number, number]; // 目标的期望设计稿尺寸。
+  realZoom: [number, number]; // 目标的当前真实尺寸。
+  zoom: number; // 当前缩放等级
   transform:  string | (zoom:number, [referenceWidth, referenceHeight], [designWidth, designHeight]) => string; // 除scale外需要添加到目标元素上的其他transform属性(如：translate、rotate等，支持自定义函数控制自动缩放的transform)。
   style: { [key:string]: string }, // 其他需要注册到DOM上的CSS样式
   pause:boolean; // 观察器的初始 或 当前暂停状态。
@@ -134,7 +136,6 @@ type removeListener = Function;
 class AutoZoom {
   constructor(options:AutoZoomOptions) {}
   [K in keyof AutoZoomOptions]: AutoZoomOptions[K];
-  zoom: number; // 当前缩放等级。
   rezoom: Function; // 触发一次自动缩放。
   unobserve: Function; // 从参照元素上移除自动缩放观察器。
   stop: Function; // 停止(暂停)自动缩放观察器。
